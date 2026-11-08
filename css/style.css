@@ -1,0 +1,21 @@
+html,body{margin:0;height:100%;overflow:hidden;background:#06021a;font-family:Georgia,"Times New Roman",serif}
+body{animation:fadeIn 2s ease both}
+@keyframes fadeIn{from{opacity:0}}
+canvas{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+#ui{position:fixed;left:0;right:0;top:0;padding:calc(env(safe-area-inset-top,0px) + 6vh) 16px 0;text-align:center;pointer-events:none;color:#fff}
+#ui.swap{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+h1{margin:0;font-size:clamp(32px,9vw,88px);font-weight:700;letter-spacing:.03em;background:linear-gradient(90deg,#ffe08a,#ff8a3d,#ff4f9a,#ffe08a,#ffb347);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 7s linear infinite,bob 4s ease-in-out infinite;filter:drop-shadow(0 0 22px rgba(255,150,60,.45))}
+@keyframes shine{to{background-position:300% 0}}
+@keyframes bob{50%{transform:translateY(-6px)}}
+#sub{margin-top:.5em;font-size:clamp(14px,3vw,20px);color:#ffe3ad;font-style:italic;letter-spacing:.06em;transition:opacity .5s;text-shadow:0 0 12px rgba(255,170,80,.6)}
+#nav{position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);display:flex;align-items:center;justify-content:center;gap:14px}
+#nav button{background:rgba(255,200,120,.14);border:1px solid rgba(255,220,160,.5);color:#ffe9c2;width:46px;height:46px;border-radius:50%;font-size:24px;cursor:pointer;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);transition:background .3s,transform .15s,box-shadow .3s}
+#nav button:hover{background:rgba(255,200,120,.3);box-shadow:0 0 16px rgba(255,180,80,.5)}
+#nav button:active{transform:scale(.9)}
+#dots{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;max-width:60vw}
+#dots i{width:9px;height:9px;border-radius:50%;background:rgba(255,220,160,.3);transition:all .3s;cursor:pointer}
+#dots i.on{background:#ffd36b;box-shadow:0 0 10px #ffb347;transform:scale(1.3);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 18px #ffd36b}}
+#hint{position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 70px);text-align:center;color:#ffd9a0;font-size:13px;opacity:0;pointer-events:none;transition:opacity 1s}
+#fade{position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity .4s}
