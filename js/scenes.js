@@ -1,4 +1,3 @@
-const DW = window.DW;
 const {g, R, CALM, pick, WARM, MARI, bg, drawStars, moon, emitBurst, spark, diya, lantern, petal, parts} = DW;
 const TYPES = [0, 1, 3], rt = () => TYPES[Math.random() * 3 | 0];
 
