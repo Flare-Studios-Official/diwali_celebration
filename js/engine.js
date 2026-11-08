@@ -43,7 +43,7 @@ function emitBurst(x, y, c, type) {
     parts.push({x, y, vx: Math.cos(an) * sp, vy: Math.sin(an) * sp, life: 1, d: type === 3 ? R(.004,.008) : R(.011,.018), c: Math.random() < .5 ? a : b, s: R(1.4,2.6) * S, g: type === 3 ? .012 : .045, fl: type === 0 ? 1 : 0});
   }
   parts.push({x, y, vx: 0, vy: 0, life: 1, d: .09, c: '#fff8e0', s: 10 * S, g: 0, fl: 0, glow: 1});
-  addFlash(.03);
+  addFlash(.03); if (DW.sfx) DW.sfx.boom();
 }
 function spark(x, y, c, n, spd) {
   for (let i = 0; i < n; i++) parts.push({x, y, vx: R(-spd,spd)*S, vy: R(-spd*1.5,-spd*.3)*S, life: 1, d: R(.02,.035), c: Math.random() < .5 ? c : '#fff3c4', s: 1.6*S, g: .07, fl: 1});
@@ -111,7 +111,7 @@ function applyScene() {
   [...$('dots').children].forEach((d, i) => d.classList.toggle('on', i === cur));
 }
 function go(i) {
-  if (busy) return; busy = true; $('fade').style.opacity = 1;
+  if (busy) return; busy = true; $('fade').style.opacity = 1; if (DW.sfx) DW.sfx.whoosh();
   setTimeout(() => { cur = (i + scenes.length) % scenes.length; applyScene(); $('fade').style.opacity = 0; busy = false; }, 400);
 }
 function frame(now) {
