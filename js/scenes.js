@@ -20,7 +20,7 @@ DW.scenes.push({
   title: 'Happy Diwali', sub: 'May your days shine with light', hint: 'Tap the sky for fireworks',
   rockets: [], meteors: [], nextAuto: 0, nextMeteor: 0,
   init() { this.rockets = []; this.meteors = []; this.nextAuto = 0; this.nextMeteor = 0; },
-  launch(x) { this.rockets.push({x, y: DW.H+5, vx: R(-.5,.5)*DW.S, vy: -R(10,13)*DW.S, ty: R(DW.H*.12, DW.H*.45), c: pick(), type: rt()}); },
+  launch(x) { if (DW.sfx) DW.sfx.launch(); this.rockets.push({x, y: DW.H+5, vx: R(-.5,.5)*DW.S, vy: -R(10,13)*DW.S, ty: R(DW.H*.12, DW.H*.45), c: pick(), type: rt()}); },
   update(k, now) {
     if (now > this.nextAuto) { this.launch(R(DW.W*.12, DW.W*.88)); this.nextAuto = now + (CALM ? 4000 : R(900,1700)); }
     if (now > this.nextMeteor && !CALM) { this.meteors.push({x: R(0,DW.W), y: R(0,DW.H*.3), vx: R(6,9)*DW.S, vy: R(3,5)*DW.S, life: 1}); this.nextMeteor = now + R(2500,5000); }
@@ -70,7 +70,7 @@ DW.scenes.push({
       const dx = DW.W*(i+.5)/this.N;
       if (Math.abs(x-dx) < sp*.6 && y > y0-70*DW.S && y < y0+14*DW.S) {
         if (!this.lit[i]) {
-          this.lit[i] = true; spark(dx, y0-10*DW.S, '#ffd27a', 14, 2);
+          this.lit[i] = true; spark(dx, y0-10*DW.S, '#ffd27a', 14, 2);if (DW.sfx) DW.sfx.chime();
           if (this.lit.every(Boolean)) {
             this.doneAt = now;
             for (let j = 0; j < 6; j++) setTimeout(() => emitBurst(R(DW.W*.15,DW.W*.85), R(DW.H*.08,DW.H*.4), pick(), rt()), j*300);
@@ -133,7 +133,7 @@ DW.scenes.push({
     }
     g.globalAlpha = 1; g.globalCompositeOperation = 'source-over';
   },
-  down(x, y, now) { this.cur = [{x, y, t: now}]; this.strokes.push(this.cur); spark(x, y, '#ffd27a', 8, 1); },
+  down(x, y, now) { this.cur = [{x, y, t: now}]; this.strokes.push(this.cur); spark(x, y, '#ffd27a', 8, 1);if (DW.sfx) DW.sfx.crackle(); },
   move(x, y, now) {
     if (!this.cur) return;
     const p = this.cur[this.cur.length-1];
